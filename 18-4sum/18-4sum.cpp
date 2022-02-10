@@ -23,12 +23,12 @@ public:
                 while(k < l)
                 {
                    int c(nums[k]), d(nums[l]);
-                    if(c + d < target-(a+b))
+                    if(1LL*(c + d) < 1LL*(target-(a+b)))
                     {
                         // increaseleft(k, l, nums);
                         k++;
                     }
-                    else if(c + d > target-(a+b))
+                    else if(1LL*(c + d) >  1LL*(target-(a+b)))
                     {
                         // decreaseright(k, l, nums);
                         l--;
