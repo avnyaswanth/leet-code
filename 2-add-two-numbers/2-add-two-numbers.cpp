@@ -18,20 +18,14 @@ public:
         while(l1 or l2)
         {
             int sum = 0;
-            if(l1)
-                sum += l1->val;
-            if(l2)
-                sum += l2->val;
+            sum = (l1 ? l1->val : 0) + (l2 ? l2->val : 0);
             sum += carry;
             carry = sum / 10;
             sum %= 10;
-            // cout  << carry << endl;
             head->next = new ListNode(sum);
             head = head->next;
-            if(l1)
-                l1 = l1->next;
-            if(l2)
-                l2 = l2->next;
+            l1 = l1 == NULL ? NULL : l1->next;
+            l2 = l2 == NULL ? NULL : l2->next;
         }
         if(carry)
             head->next = new ListNode(carry);
