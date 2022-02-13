@@ -26,12 +26,12 @@ public:
     ListNode* rotateRight(ListNode* head, int k) {
         if(!head || !head->next)
             return head;
-        ListNode *start = head;
+        
         int count = length(head);
         k = k % count;
-        if(k == 0 || k == count || count == 0)
+        if(k == 0 || k == count)
             return head;
-        ListNode *prev = start , *cur = start;
+        ListNode *prev = head , *cur = head;
         for(int i=0;i<count-k;++i)
         {
             prev = cur;
