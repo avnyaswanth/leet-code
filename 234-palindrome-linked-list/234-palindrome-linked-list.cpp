@@ -14,8 +14,6 @@ public:
     bool isPalindrome(ListNode* head) {
         if(!head || !head->next)
             return true;
-        // if(head->next->next == NULL)
-        //     return head->val == head->next->val;
         
         ListNode *slow = new ListNode();
         slow->next = head;
