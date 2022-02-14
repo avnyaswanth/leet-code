@@ -21,7 +21,7 @@ public:
                 cur->next = cur->child;
                 cur->next->prev = cur;
                 cur->child = NULL;
-                Node *childcur = cur;
+                Node *childcur = cur->next;
                 while(childcur->next)
                     childcur = childcur->next;
                 childcur->next = next;
