@@ -42,7 +42,7 @@ class Solution
            else
            {
                int rem = W - curW;
-               profit += (arr[i].value / (double)arr[i].weight) *(double) rem;
+               profit += (arr[i].value / (double)arr[i].weight)*rem;
                break;
            }
        }
