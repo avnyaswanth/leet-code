@@ -21,40 +21,33 @@ struct Item{
 class Solution
 {
     public:
-    static bool comp(Item a, Item b) {
-    double r1 = (double)a.value / (double)a.weight;
-    double r2 = (double)b.value / (double)b.weight;
-    return r1 > r2; 
-}
-// function to return fractionalweights
-double fractionalKnapsack(int W, Item arr[], int n)
-{
-    // Your code here
-    
-    sort(arr, arr + n, comp); 
-    
-    int curWeight = 0; 
-    double finalvalue = 0.0; 
- 
-    
-    for (int i = 0; i < n; i++) {
-       
-        if (curWeight + arr[i].weight <= W) {
-            curWeight += arr[i].weight;
-            finalvalue += arr[i].value;
-        }
- 
-
-        else {
-            int remain = W - curWeight;
-            finalvalue += (arr[i].value / (double)arr[i].weight) * (double)remain;
-            break;
-        }
+    static bool comp(Item a, Item b)
+    {
+        double pa = (double)a.value / (double)a.weight;
+        double pb = (double)b.value / (double)b.weight;
+        return pa > pb;
     }
- 
-    return finalvalue;
-    
-}
+    double fractionalKnapsack(int W, Item arr[], int n)
+    {
+       sort(arr, arr+n, comp);
+       int curW = 0;
+       double profit = 0.0;
+       for(int i=0;i<n;++i)
+       {
+           if(curW + arr[i].weight <= W)
+           {
+               curW += arr[i].weight;
+               profit += arr[i].value;
+           }
+           else
+           {
+               int rem = W - curW;
+               profit += (arr[i].value / (double)arr[i].weight) *(double) rem;
+               break;
+           }
+       }
+       return profit;
+    }
         
 };
 
