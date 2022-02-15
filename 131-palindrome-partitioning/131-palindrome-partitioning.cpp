@@ -7,20 +7,15 @@ public:
     }
     bool ispalindrome(int i, int j, string s)
     {
-        int start = i, end = j;
-        if(pal[start][end] != -1)
-            return pal[start][end];
+        int start(i), end(j);
+        if(pal[i][j] != -1)
+            return pal[i][j];
+        
         while(i < j)
-        {
-            if(s[i] != s[j])
-            {
-                pal[start][end] = 0;
-                return false;
-            }
-            i++, j--;
-        }
-        pal[start][end] = 1;
-        return true;
+            if(s[i++] != s[j--])
+                return pal[start][end] = 0;
+        return pal[start][end] = 1;
+        
     }
     void partitionUtil(vector<vector<string>> &ans, vector<string> vec, string s, int i, int n)
     {
