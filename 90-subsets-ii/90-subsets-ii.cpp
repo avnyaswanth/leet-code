@@ -3,14 +3,16 @@ public:
     void findSubsets(vector<int> nums, int i, int n, vector<vector<int>> &ans, 
                      vector<int> subset )
     {
-        if(i == n)
+        ans.push_back(subset);
+        for(int j=i;j<n;++j)
         {
-            ans.push_back(subset);
-            return ;
+            if(j == i || nums[j] != nums[j-1])
+            {
+                subset.push_back(nums[j]);
+                findSubsets(nums, j+1, n, ans, subset);
+                subset.pop_back();
+            }
         }
-        findSubsets(nums, i+1, n, ans, subset);
-        subset.push_back(nums[i]);
-        findSubsets(nums, i+1, n, ans, subset);
     }
     vector<vector<int>> subsetsWithDup(vector<int>& nums) {
         int n = nums.size();
@@ -18,8 +20,6 @@ public:
         vector<vector<int>> ans;
         vector<int> subset;
         findSubsets(nums, 0, n, ans, subset);
-        set<vector<int>> st(ans.begin(), ans.end());
-        vector<vector<int>> res(st.begin(), st.end());
-        return res;
+        return ans;
     }
 };
