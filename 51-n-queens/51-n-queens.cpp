@@ -1,30 +1,16 @@
 class Solution {
 public:
-    bool issafe(vector<string> ans, int x, int y, int n)
+    int leftdiag[17], rightdiag[17], up[9];
+    Solution()
     {
-        int dx(x), dy(y);
-        while(dx > 0)   // move up
-        {
-            dx --;
-            if(ans[dx][dy] == 'Q')
-                return false;
-        }
-        dx = x;
-        while(dx > 0 && dy > 0)
-        {
-            dx--, dy--;
-            if(ans[dx][dy] == 'Q')
-                return false;
-        }
-        dx = x, dy = y;
-        while(dy < n-1 && dx > 0)
-        {
-            dy++, dx--;
-            if(ans[dx][dy] == 'Q')
-                return false;
-        }
-        return true;
+        memset(leftdiag, 0, sizeof(leftdiag));
+        memset(rightdiag, 0, sizeof(rightdiag));
+        memset(up, 0, sizeof(up));
     }
+    // bool issafe(vector<string> ans, int x, int y, int n)
+    // {
+    //     return 1;
+    // }
     void solve(vector<vector<string>> &result, vector<string> ans, int x, int n)
     {
         if(x == n)
@@ -34,11 +20,17 @@ public:
         }
         for(int i=0;i<n;++i)
         {
-            if(issafe(ans, x, i, n))
+            if(up[i] == 0 && leftdiag[n-1+x-i] == 0 && rightdiag[x+i] == 0)
             {
                 ans[x][i] = 'Q';
+                up[i] = 1;
+                leftdiag[n-1+x-i] = 1;
+                rightdiag[x+i] = 1;
                 solve(result, ans, x+1, n);
                 ans[x][i] = '.';
+                up[i] = 0;
+                leftdiag[n-1+x-i] = 0;
+                rightdiag[x+i] = 0;
             }
         }
     }
