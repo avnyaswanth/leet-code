@@ -24,11 +24,11 @@ class Solution{
             return ;
         }
         
-        // up, down, left, right;
+        // down, left, right, up
       
-        int di[] = {-1, 1, 0, 0};
-        int dj[] = {0, 0, -1, 1};
-        char direction[] = {'U','D','L','R'};
+        int di[] = {+1, 0, 0, -1}; 
+        int dj[] = {0, -1, 1, 0}; 
+        string direction = "DLRU";
         for(int k=0;k<4;++k)
         {
             int ni = i + di[k];
@@ -45,13 +45,11 @@ class Solution{
     }
     vector<string> findPath(vector<vector<int>> &maze, int n) {
         vector<string> paths;
-        if(maze[0][0] == 0 || maze[n-1][n-1] == 0)
-            return paths;
         string path;
         memset(visited, 0, sizeof(visited));
         visited[0][0] = 1;
-        findSol(maze, paths, path, 0, 0, n);
-        sort(paths.begin(), paths.end());
+         if(maze[0][0] == 1 && maze[n-1][n-1] == 1)
+            findSol(maze, paths, path, 0, 0, n);
         return paths;
     }
 };
