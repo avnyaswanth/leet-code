@@ -1,5 +1,5 @@
 # Longest Prefix Suffix
-## Medium 
+##  Medium 
 <div class="problem-statement">
                 <p></p><p><span style="font-size:18px">Given a string of characters, find the length of the longest proper prefix which is also a proper suffix.</span></p>
 
