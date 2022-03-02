@@ -27,8 +27,8 @@ bool searchPattern(string str, string pat)
     
     for(int i=0;i<m;++i)
     {
-        ph = (d * ph + (pat[i])) % q;
-        th = (d * th + (str[i])) % q;
+        ph = (d * ph + (pat[i] - 'a')) % q;
+        th = (d * th + (str[i] - 'a')) % q;
     }
     for(int i=0;i<=n-m;++i)
     {
@@ -48,7 +48,7 @@ bool searchPattern(string str, string pat)
         }
         if(i < n-m)
         {
-            th = (d*(th - h*(str[i])) + (str[i+m])) % q;
+            th = (d*(th - h*(str[i]-'a')) + (str[i+m]-'a')) % q;
             if(th < 0)
                 th += q;
         }
