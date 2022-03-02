@@ -36,9 +36,7 @@ class Solution{
 	            }
 	        }
 	    }
-	    for(int i=0;i<n;++i)
-	        maxLength = max(lps[j-1], maxLength);
-	    return maxLength;
+	    return lps[j-1];
 	}
 };
 
