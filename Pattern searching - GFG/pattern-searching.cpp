@@ -13,48 +13,37 @@ str: string in which pattern we have to find pattern.
 text: pattern needs to searched.
 */
 
+void computeLps(int *lps, int m, string pat)
+{
+    lps[0] = 0;
+    int i = 1;
+    int j;
+    for(int i=1;i<m;++i)
+    {
+        j = lps[i-1];
+        while(j > 0 && pat[i] != pat[j])
+            j = lps[j-1];
+        if(pat[i] == pat[j])
+            j++;
+        lps[i] = j;
+    }
+}
+
 bool searchPattern(string str, string pat)
 {
     int n = str.length();
     int m = pat.length();
-    int d = 26;
-    int q = 101;
-    int ph = 0, th = 0;
-    int h = 1;
+    string newstr = pat + "#" + str;
+    int lps[m+n+1];
+    computeLps(lps, m+n+1, newstr);
     
-    for(int i=0;i<m-1;++i)
-        h = (h * d) % q;
-    
-    for(int i=0;i<m;++i)
-    {
-        ph = (d * ph + (pat[i] - 'a')) % q;
-        th = (d * th + (str[i] - 'a')) % q;
-    }
-    for(int i=0;i<=n-m;++i)
-    {
-        if(ph == th)
-        {
-            bool flag = 1;
-            for(int j=0;j<m;++j)
-            {
-                if(pat[j] != str[i+j])
-                {
-                    flag = 0;
-                    break;
-                }
-            }
-            if(flag)
-                return true;
-        }
-        if(i < n-m)
-        {
-            th = (d*(th - h*(str[i]-'a')) + (str[i+m]-'a')) % q;
-            if(th < 0)
-                th += q;
-        }
-    }
-    return false;
+    int i = 0, j = 0;
+    for(int i=0;i<m+n+1;++i)
+        if(lps[i] == m)
+            return 1;
+    return 0;
 }
+
 
 
 
