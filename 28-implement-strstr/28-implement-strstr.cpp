@@ -5,6 +5,8 @@ public:
         int n = haystack.length();
         int m = needle.length();
         int idx = -1;
+        if(m > n)
+            return idx;
         int lps[n+m+1];
         lps[0] = 0;
         int j = 0;
