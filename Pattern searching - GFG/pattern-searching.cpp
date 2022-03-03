@@ -17,7 +17,7 @@ bool searchPattern(string str, string pat)
 {
     int n = str.length();
     int m = pat.length();
-    int d = 256;
+    int d = 26;
     int q = 101;
     int ph = 0, th = 0;
     int h = 1;
