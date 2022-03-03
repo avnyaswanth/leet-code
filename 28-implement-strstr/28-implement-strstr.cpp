@@ -7,23 +7,26 @@ public:
         int idx = -1;
         if(m > n)
             return idx;
-        int lps[n+m+1];
-        lps[0] = 0;
-        int j = 0;
-        for(int i=1;i<n+m+1;++i)
+        if(m == 0)
+            return 0;
+        int t = n+m+1;
+        int z[t];
+        memset(z, 0, sizeof(z));
+        int l, r;
+        for(int i=1, l = 0, r = 0;i<t;++i)
         {
-            j = lps[i-1];
-            while(j > 0 && newstr[i] != newstr[j])
-                j = lps[j-1];
-            if(newstr[i] == newstr[j])
-                j++;
-            lps[i] = j;
+            if(i <= r)
+                z[i] = min(r-i+1, z[i-l]);
+            while(i+z[i] < t && newstr[z[i]] == newstr[i+z[i]])
+                z[i]++;
+            if(i+z[i]-1 > r)
+                l = i, r = i+z[i]-1;
         }
-        for(int i=0;i<n+m+1;++i)
+        for(int i=0;i<t;++i)
         {
-            if(lps[i] == m)
+            if(z[i] == m)
             {
-                idx = i-2*m;
+                idx = i-(m+1);
                 break;
             }
         }
