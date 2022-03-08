@@ -6,11 +6,6 @@ public:
         int res = *max_element(nums.begin(), nums.end());
         for(auto num : nums)
         {
-            if(num == 0)
-            {
-                curmax = curmin = 1;
-                continue;
-            }
             int temp = num * curmax;
             curmax = max(num * curmax, num * curmin);
             curmax = max(curmax, num);
