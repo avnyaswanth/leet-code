@@ -4,36 +4,32 @@ public:
         int n = s.length();
         int m = p.length();
         vector<int> ans;
-        unordered_map<char, int> mp;
-        
-        for(auto ch : p)
-            mp[ch]++;
-        
-        int count = mp.size();
-        
+        int shash[26], phash[26];
+        memset(shash, 0, sizeof(shash));
+        memset(phash, 0, sizeof(phash));
+        for(int i=0;i<m;++i)
+            phash[p[i]-'a']++;
         int i = 0, j = 0;
         while(j < n)
         {
-            if(mp.find(s[j]) != mp.end())
-            {
-                mp[s[j]]--;
-                if(mp[s[j]] == 0)
-                    count--;
-            }
+            shash[s[j]-'a']++;
             if(j - i + 1 == m)
             {
-                if(count == 0)
-                    ans.push_back(i);
-                if(mp.find(s[i]) != mp.end())
+                bool flag(1);
+                for(int k=0;k<26;++k)
                 {
-                  if(mp[s[i]] == 0)
-                      count++;
-                  mp[s[i]]++;
+                    if(shash[k] != phash[k])
+                    {
+                        flag = 0;
+                        break;
+                    }
                 }
+                if(flag)
+                    ans.push_back(i);
+                shash[s[i]-'a']--;
                 i++;
-                j++;
             }
-            else j++;
+            j++;
         }
         return ans;
     }
