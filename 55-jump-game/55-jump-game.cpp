@@ -12,7 +12,7 @@ public:
         for(int i=idx+1;i<=idx+nums[idx];++i)
         {
             if(canJump(i, nums, n))
-                return dp[i] = true;
+                return dp[idx] = true;
         }
         return dp[idx] = false;
     }
