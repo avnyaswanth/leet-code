@@ -5,34 +5,38 @@ using namespace std;
  // } Driver Code Ends
 class Solution {
 public:
-    bool dfs(int ver, vector<int>adj[], int col[])
+    bool bfs(int v, vector<int>adj[], int col[])
     {
-       for(auto node : adj[ver])
-       {
-           if(col[node] == -1)
-           {
-               col[node] = col[ver]^1;
-               if(!dfs(node, adj, col))
-                return false;
-           }
-           else if(col[node] == col[ver])
-            return false;
-       }
-       return true;
-    }
-    
-	bool isBipartite(int V, vector<int>adj[]){
-	    
-	    int col[V];
-	    memset(col, -1, sizeof(col));
-	    for(int v=0;v<V;++v)
+        queue<int> q;
+	    q.push(v);
+	    col[v] = 0;
+	    while(!q.empty())
 	    {
-	        if(col[v] == -1)
+	        int ver = q.front();
+	        q.pop();
+	        for(auto node : adj[ver])
 	        {
-	            col[v] = 0;
-	            if(!dfs(v, adj, col))
+	            if(col[node] == -1)
+                {
+                    col[node] = col[ver] ^ 1; 
+                    q.push(node);
+                }
+	            else if(col[node] == col[ver])
 	                return false;
 	        }
+	    }
+	    return true;
+    }
+	bool isBipartite(int V, vector<int>adj[]){
+	    int col[V];
+	    memset(col, -1, sizeof col);
+	    for(int i=0;i<V;++i)
+	    {
+	       if(col[i] == -1)
+	       {
+	           if(!bfs(i, adj, col))
+	            return false;
+	       }
 	    }
 	    return true;
 	}
